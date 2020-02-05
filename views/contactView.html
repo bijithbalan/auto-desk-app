@@ -1,0 +1,81 @@
+<!doctype html>
+<html ng-app="app">
+
+<head>
+    <title>Contact Display</title>
+    <!-- Required dependent library files called at the begining for better user experience-->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="http://ui-grid.info/release/ui-grid.js"></script>
+    <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">
+</head>
+
+<body>
+    <!-- Defining the controller-->
+    <div ng-controller="contactController" ng-init="getContactList()">
+        <h3>Click on the row to view the contact details.</h3>
+        <section>
+            <!-- Defining the ui grid for tabular data -->
+            <div ui-grid="gridOptions" ui-grid-selection class="grid"></div>
+            <!-- Defining the contact details area -->
+            <div class="contact-page" ng-if="gridOptions.data">
+                <div class="block">
+                    <label>Employee ID: </label>
+                    <input name="employeeID" ng-model="contactDetails.employeeID" type=number required>
+                </div>
+                <div class="block">
+                    <label>First Name: </label>
+                    <input name="firstName" ng-model="contactDetails.firstName" required>
+                </div>
+                <div class="block">
+                    <label>Last Name: </label>
+                    <input name="lastName" ng-model="contactDetails.lastName" required>
+                </div>
+                <div class="block">
+                    <label>Department: </label>
+                    <input name="department" ng-model="contactDetails.department">
+                </div>
+                <div class="block">
+                    <label>Address: </label>
+                </div>
+                <div class="block">
+                    <label>Street: </label>
+                    <input name="streetAddress" ng-model="contactDetails.address.streetAddress">
+                </div>
+                <div class="block">
+                    <label>City: </label>
+                    <input name="city" ng-model="contactDetails.address.city" required>
+                </div>
+                <div class="block">
+                    <label>State: </label>
+                    <input name="state" ng-model="contactDetails.address.state" required>
+                </div>
+                <div class="block">
+                    <label>Postal Code: </label>
+                    <input name="postalCode" ng-model="contactDetails.address.postalCode" required>
+                </div>
+                <div class="block">
+                    <label>Home Phone: </label>
+                    <input name="homeNumber" ng-model="contactDetails.homeNumber" required>
+                </div>
+                <div class="block">
+                    <label>Fax Number: </label>
+                    <input name="faxNumber" ng-model="contactDetails.faxNumber">
+                </div>
+                <button ng-click="addContactDetails()">Add Contact</button>
+                <button ng-if="contactDetails.employeeID" ng-click="updateContactDetails()">Update Contact</button>
+                <button ng-if="contactDetails.employeeID" ng-click="deleteContactDetails()">Delete Contact</button>
+                <div>{{serviceResponseMessage.message}}</div>
+            </div>
+        </section>
+    </div>
+    <!-- Calling the library files -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-touch.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.js"></script>    
+    <!-- Including the app specific javacsript and css files -->
+    <script src="/javascripts/contactService.js"></script>
+    <script src="/javascripts/contactController.js"></script>
+    <script src="/javascripts/contactApp.js"></script>
+    <link rel="stylesheet" href="stylesheets/contact-details.css" type="text/css">
+</body>
+
+</html>
